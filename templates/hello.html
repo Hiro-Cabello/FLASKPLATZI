@@ -1,0 +1,49 @@
+<!--Con esto vamos a renderear lo que esta en base.html-->
+{% extends 'base.html' %}
+{%import 'macros.html' as macros %}
+<!--Con lo del super() indico que no se sobreescriba el contenido del
+titulo-->
+
+
+
+<!--Pues sino pongo esto se va a sobreescribir-->
+<!--Estructura de control -->
+<!-- 
+
+url_for() nos permite encontrar la ruta especifica solo ingresando el 
+nombre de la funcion
+-->
+<!--Este es el contenido que se va mostrar  en base -->
+{% block title %}
+    {{super()}} 
+    Bienvenido 
+{% endblock %}
+
+{% block content %}
+    {% if user_ip %}
+        <h1>Hello World Flask Hiro IP es {{user_ip}}</h1>
+    {% else %}
+        <a href="{{url_for('index')}}">Ir a inicio</a>
+    {% endif %}
+    <ul>
+        {% for todo in todos %}
+            {{macros.render_todo(todo)}}
+        <!--   <li>{{todo}}</li>-->
+          <!--Con los doble {} se habla recien de las variables-->
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
