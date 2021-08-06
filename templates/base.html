@@ -1,33 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{%  extends 'bootstrap/base.html' %}
+
+{% block head %}
+    {{ super() }}
     <title>
+
         {% block title%}
             Flask Platzi
         {% endblock %}
+
+
     </title>
-  <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
-</head>
-<body>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+{% endblock %}
 
-    <header>
+
+
+{% block body %}
+
+
+
+    {% block navbar %}
         {% include 'navbar.html' %}
-    </header>
-
-
-
-    {%block content%}
     {% endblock %}
 
 
-    
-</body>
-</html>
+claro  980 614 580 
+
+    <!--Esto sirve para pintar el message-->
+    <!--{{message}} identifica todos los mensajes que ya fueron flasheados par apoder mostrarlo -->
+    {% for message  in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" 
+                data-dismiss="alert" 
+                class="close"> 
+                &times;
+                {{message}}
+            </button>
+        </div>
+    {% endfor  %}
 
 
 
+
+
+
+     {%block content%}
+     {% endblock %}
+
+
+
+     {% block scripts %}
+        {{super()}}
+     {% endblock %}
+
+{% endblock %}
 
 
 

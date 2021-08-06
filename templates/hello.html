@@ -1,15 +1,14 @@
 <!--Con esto vamos a renderear lo que esta en base.html-->
 {% extends 'base.html' %}
 {%import 'macros.html' as macros %}
+
+
+{% import  'bootstrap/wtf.html' as wtf %}
 <!--Con lo del super() indico que no se sobreescriba el contenido del
 titulo-->
-
-
-
 <!--Pues sino pongo esto se va a sobreescribir-->
 <!--Estructura de control -->
 <!-- 
-
 url_for() nos permite encontrar la ruta especifica solo ingresando el 
 nombre de la funcion
 -->
@@ -20,11 +19,26 @@ nombre de la funcion
 {% endblock %}
 
 {% block content %}
+
+    {% if username %}
+        <!-- Filtros que se le puede poner a las salidas -->
+        <!-- -->
+        <h1>Bienvenido, {{username | capitalize}} </h1>
+    {% endif %}
+
+
+
     {% if user_ip %}
-        <h1>Hello World Flask Hiro IP es {{user_ip}}</h1>
+        <h3>Hello World Flask Hiro IP es {{user_ip}}</h3>
     {% else %}
         <a href="{{url_for('index')}}">Ir a inicio</a>
     {% endif %}
+
+    <div class="container">
+        {{wtf.quick_form(login_form)}}
+    </div>
+
+
     <ul>
         {% for todo in todos %}
             {{macros.render_todo(todo)}}
@@ -32,6 +46,8 @@ nombre de la funcion
           <!--Con los doble {} se habla recien de las variables-->
         {% endfor %}
     </ul>
+
+
 {% endblock %}
 
 
